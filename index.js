@@ -17,7 +17,7 @@ class Person extends ValueNode {
     super(path, provider);
   }
   initialize() {
-    
+
   }
 }
 
@@ -31,7 +31,8 @@ const parseWebhook = (body) => {
   let status = body.data.status;
 
   if (username && status) {
-    board.createChild(username, Person);
+    let person = board.createChild(username, Person);
+    person.setValue(status);
     return true;
   } else {
     return false;
