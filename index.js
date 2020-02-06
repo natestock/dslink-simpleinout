@@ -32,11 +32,11 @@ class Person extends ValueNode {
 Person.profileName = 'person';
 Person.saveNodeOnChange = true;
 
-async function main() {
+function main() {
   let rootNode = new RootNode();
   rootNode.createChild('Board', Board);
   let link = new DSLink('simpleinout', {rootNode, saveNodes: true});
-  await link.connect();
+  link.connect();
 }
 
 app.post('/simpleinout', (req, res, next) => {
