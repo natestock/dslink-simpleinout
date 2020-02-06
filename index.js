@@ -15,9 +15,13 @@ class Board extends BaseLocalNode {
 class Person extends ValueNode {
   constructor(path, provider) {
     super(path, provider);
+    this.createChild('Remove', Remove);
   }
-  initialize() {
+}
 
+class Remove extends ActionNode {
+  onInvoke(params, parentNode) {
+      parentNode.provider.removeNode(parentNode.path);
   }
 }
 
@@ -31,8 +35,12 @@ const parseWebhook = (body) => {
   let status = body.data.status;
 
   if (username && status) {
-    let person = board.createChild(username, Person);
-    person.setValue(status);
+    if (this.children.has(username)) {
+
+    } else {
+      let person = board.createChild(username, Person);
+      person.setValue(status);
+    }
     return true;
   } else {
     return false;
