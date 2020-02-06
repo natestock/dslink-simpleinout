@@ -37,10 +37,11 @@ const parseWebhook = (body) => {
   if (username && status) {
     if (board.children.has(username)) {
       let person = board.children.get(username);
+      person.setValue(status);
     } else {
-      let person = board.createChild(username, Person);
+      let newPerson = board.createChild(username, Person);
+      newPerson.setValue(status);
     }
-    person.setValue(status);
     return true;
   } else {
     return false;
