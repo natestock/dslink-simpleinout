@@ -65,4 +65,4 @@ let rootNode = new RootNode();
 let board = rootNode.createChild('Board', Board);
 let link = new DSLink('simpleinout', {rootNode, saveNodes: true});
 link.connect();
-board.catchWebhook;
+board.catchWebhook();
