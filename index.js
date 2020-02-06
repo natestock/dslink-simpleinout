@@ -7,6 +7,8 @@ const errorhandler = require('errorhandler');
 class Board extends BaseLocalNode {
   constructor(path, provider) {
     super(path, provider);
+    const app = express();
+    const port = 8444;
   }
   parseWebhook = (body) => {
     let username = body.username;
@@ -40,7 +42,7 @@ class Board extends BaseLocalNode {
       }
     });
 
-    this.app.listen(port, () => {
+    this.app.listen(this.port, () => {
       console.log(`Listening on port ${port}`);
     });
   }
