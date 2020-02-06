@@ -44,9 +44,9 @@ app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
-app.post('/simpleinout', (req, res, next) => {
-  console.log(req);
-  res.status(201).send();
+app.post('/', (req, res, next) => {
+  console.log(req.body);
+  res.status(201).send(req.body);
 });
 
 app.use(errorhandler());
