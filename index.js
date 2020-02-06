@@ -12,27 +12,21 @@ class Board extends BaseLocalNode {
   }
 }
 
-function main() {
-  let rootNode = new RootNode();
-  rootNode.createChild('Board', Board);
-  let link = new DSLink('simpleinout', {rootNode, saveNodes: true});
-  link.connect();
-}
-
-app.use(express.static('public'));
-
 app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-app.get('/simpleinout', (req, res, next) => {
-  res.status(201).send('Hello World');
+app.get('/', (req, res, next) => {
+  res.status(200).send('Hello World');
 });
 
 app.use(errorhandler());
 
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
-});
+let rootNode = new RootNode();
+rootNode.createChild('Board', Board);
+let link = new DSLink('simpleinout', {rootNode, saveNodes: true});
+link.connect();
 
-main();
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
