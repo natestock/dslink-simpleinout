@@ -1,6 +1,7 @@
 const {DSLink, RootNode, BaseLocalNode, ValueNode} = require("dslink");
 const express = require('express');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const errorhandler = require('errorhandler');
 const app = express();
 const port = 8444;
 
@@ -39,11 +40,15 @@ function main() {
   link.connect();
 }
 
+app.use(bodyParser());
+
 app.post('/simpleinout', (req, res, next) => {
-  console.log('Hello World');
-  //res.status(201).send();
+  console.log(req);
+  res.status(201).send();
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use(errorhandler());
+
+app.listen(port, () => console.log(`Server is listening on port ${port}`));
 
 main();
