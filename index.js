@@ -38,10 +38,11 @@ async function main() {
   let link = new DSLink('simpleinout', {rootNode, saveNodes: true});
   await link.connect();
 }
+
 app.use(bodyParser.json());
 
 app.post('/simpleinout', (req, res, next) => {
-  console.log(req.body);
+  console.log('Hello World');
   res.status(201).send();
 });
 
