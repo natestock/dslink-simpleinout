@@ -5,10 +5,10 @@ const morgan = require('morgan');
 const errorhandler = require('errorhandler');
 
 class Board extends BaseLocalNode {
+  app = express();
+  port = 8444;
   constructor(path, provider) {
     super(path, provider);
-    const app = express();
-    const port = 8444;
   }
   parseWebhook = (body) => {
     let username = body.username;
