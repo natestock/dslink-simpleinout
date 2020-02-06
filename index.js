@@ -14,10 +14,11 @@ class Board extends BaseLocalNode {
 
 app.use(bodyParser.json());
 
-app.use(morgan('dev'));
+app.use(morgan('tiny'));
 
-app.get('/', (req, res, next) => {
-  res.status(200).send('Hello World');
+app.post('/simpleinout', (req, res, next) => {
+  console.log(req.body);
+  res.status(201).send(req.body);
 });
 
 app.use(errorhandler());
