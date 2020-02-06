@@ -39,7 +39,7 @@ async function main() {
   await link.connect();
 }
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 app.post('/simpleinout', (req, res, next) => {
   console.log('Hello World');
