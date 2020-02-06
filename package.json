@@ -1,18 +1,18 @@
 {
   "name": "dslink-simpleinout",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "DSLink to integrate Simple In Out geofence service",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IOT-DSA/dslink-javascript-template.git"
+    "url": "https://github.com/natestock/dslink-simpleinout.git"
   },
-  "author": "",
+  "author": "Nathan Estock",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/IOT-DSA/dslink-javascript-template/issues"
+    "url": "https://github.com/natestock/dslink-simpleinout/issues"
   },
-  "homepage": "https://github.com/IOT-DSA/dslink-javascript-template",
+  "homepage": "https://github.com/natestock/dslink-simpleinout",
   "dependencies": {
     "body-parser": "^1.19.0",
     "dslink": "^2.0.0-alpha.0",

@@ -4,21 +4,21 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const errorhandler = require('errorhandler');
 
-class Board extends BaseLocalNode {
+class Board extends BaseLocalNode { //runs express server to catch webhook
   app = express();
   port = 8444;
   constructor(path, provider) {
     super(path, provider);
   }
-  parseWebhook = (body) => {
+  parseWebhook = (body) => {  //parses json webhook and creates/updates node accordingly
     let username = body.username;
     let status = body.data.status;
   
-    if (username && status) {
-      if (this.children.has(username)) {
+    if (username && status) { //validation
+      if (this.children.has(username)) {  //if node exists
         let person = this.children.get(username);
         person.setValue(status);
-      } else {
+      } else {  //if node does not exist
         let newPerson = this.createChild(username, Person);
         newPerson.setValue(status);
       }
@@ -33,12 +33,12 @@ class Board extends BaseLocalNode {
 
     this.app.use(errorhandler());
 
-    this.app.post('/simpleinout', (req, res, next) => {
+    this.app.post('/simpleinout', (req, res, next) => { //basic POST router 
       const status = this.parseWebhook(req.body);
       if (status) {
-        res.status(201).send(req.body);
+        res.status(201).send(req.body); //created or updated node successfully
       } else {
-        res.status(400).send();
+        res.status(400).send(); //invalid request
       }
     });
 
@@ -48,7 +48,7 @@ class Board extends BaseLocalNode {
   }
 }
 
-class Person extends ValueNode {
+class Person extends ValueNode {  //username and current status of person
   constructor(path, provider) {
     super(path, provider);
     this.createChild('Remove', Remove);
