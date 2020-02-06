@@ -15,6 +15,7 @@
   "homepage": "https://github.com/IOT-DSA/dslink-javascript-template",
   "dependencies": {
     "dslink": "^2.0.0-alpha.0",
+    "express": "^4.17.1",
     "node": "^13.6.0"
   }
 }
