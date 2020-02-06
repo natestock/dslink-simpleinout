@@ -16,19 +16,39 @@ class Person extends ValueNode {
   constructor(path, provider) {
     super(path, provider);
   }
+  initialize() {
+    
+  }
 }
 
 let rootNode = new RootNode();
 let board = rootNode.createChild('Board', Board);
 let link = new DSLink('simpleinout', {rootNode, saveNodes: true});
 link.connect();
+
+const parseWebhook = (body) => {
+  let username = body.username;
+  let status = body.data.status;
+
+  if (username && status) {
+    board.createChild(username, Person);
+    return true;
+  } else {
+    return false;
+  }
+}
+
 app.use(bodyParser.json());
 
 app.use(morgan('tiny'));
 
 app.post('/simpleinout', (req, res, next) => {
-  board.createChild('Test', Person);
-  res.status(201).send(req.body);
+  const status = parseWebhook(req.body);
+  if (status) {
+    res.status(201).send(req.body);
+  } else {
+    res.status(400).send();
+  }
 });
 
 app.use(errorhandler());
