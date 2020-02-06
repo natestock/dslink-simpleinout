@@ -40,7 +40,9 @@ function main() {
   link.connect();
 }
 
-app.use(bodyParser());
+app.use(express.static('public'));
+
+app.use(bodyParser.json());
 
 app.post('/simpleinout', (req, res, next) => {
   console.log(req);
@@ -49,6 +51,8 @@ app.post('/simpleinout', (req, res, next) => {
 
 app.use(errorhandler());
 
-app.listen(port, () => console.log(`Server is listening on port ${port}`));
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
 
 main();
