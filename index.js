@@ -1,30 +1,25 @@
-const {DSLink, RootNode, BaseLocalNode, ValueNode} = require("dslink");
-const {http} = require("http");
+const {DSLink, RootNode, BaseLocalNode, ValueNode, ActionNode} = require("dslink");
+const {express} = require("express");
+const app = express();
+const port = 8081;
+
+app.post('/simpleinout', (req, res, next) => {
+  console.log(req);
+});
 
 class Board extends BaseLocalNode {
   constructor(path, provider) {
     super(path, provider);
-    const server = http.createServer(function (req, res) {   
-      if (req.url == '/data') { //check the URL of the current request
-              res.writeHead(200, { 'Content-Type': 'application/json' });
-              res.write(JSON.stringify({ message: "Hello World"}));  
-              res.end();  
-      }
-    });
   }
 }
 
-class Person extends ValueNode {
-  constructor(path, provider) {
-    super(path, provider, 'bool[out,in]', undefined, true);
-  }
-}
-
-async function main() {
+function main() {
   let rootNode = new RootNode();
   rootNode.createChild('Board', Board);
   let link = new DSLink('mydslink', {rootNode, saveNodes = true});
-  await link.connect();
+  link.connect();
 }
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
 main();
