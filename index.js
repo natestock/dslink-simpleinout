@@ -1,4 +1,4 @@
-const {DSLink, RootNode, BaseLocalNode, ValueNode} = require("dslink");
+const {DSLink, RootNode, BaseLocalNode, ValueNode} = require('dslink');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -25,9 +25,8 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-app.post('/simpleinout', (req, res, next) => {
-  console.log(req.body);
-  res.status(201).send(req.body);
+app.get('/simpleinout', (req, res, next) => {
+  res.status(201).send('Hello World');
 });
 
 app.use(errorhandler());
