@@ -1,6 +1,6 @@
 const {DSLink, RootNode, BaseLocalNode, ValueNode} = require("dslink");
 const express = require('express');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const app = express();
 const port = 8444;
 
@@ -39,11 +39,9 @@ async function main() {
   await link.connect();
 }
 
-//app.use(bodyParser.json());
-
 app.post('/simpleinout', (req, res, next) => {
   console.log('Hello World');
-  res.status(201).send();
+  //res.status(201).send();
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
