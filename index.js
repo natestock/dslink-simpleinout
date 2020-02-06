@@ -1,4 +1,4 @@
-const {DSLink, RootNode, BaseLocalNode, ValueNode} = require('dslink');
+const {DSLink, RootNode, BaseLocalNode, ValueNode, ActionNode} = require('dslink');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
