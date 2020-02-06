@@ -12,21 +12,26 @@ class Board extends BaseLocalNode {
   }
 }
 
+class Person extends ValueNode {
+  constructor(path, provider) {
+    super(path, provider);
+  }
+}
+
+let rootNode = new RootNode();
+let board = rootNode.createChild('Board', Board);
+let link = new DSLink('simpleinout', {rootNode, saveNodes: true});
+link.connect();
 app.use(bodyParser.json());
 
 app.use(morgan('tiny'));
 
 app.post('/simpleinout', (req, res, next) => {
-  console.log(req.body);
+  board.createChild('Test', Person);
   res.status(201).send(req.body);
 });
 
 app.use(errorhandler());
-
-let rootNode = new RootNode();
-rootNode.createChild('Board', Board);
-let link = new DSLink('simpleinout', {rootNode, saveNodes: true});
-link.connect();
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
