@@ -7,8 +7,6 @@ const errorhandler = require('errorhandler');
 class Board extends BaseLocalNode {
   constructor(path, provider) {
     super(path, provider);
-    const app = express();
-    const port = 8444;
   }
   parseWebhook = (body) => {
     let username = body.username;
@@ -28,12 +26,12 @@ class Board extends BaseLocalNode {
     }
   }
   catchWebhook() {
-    app.use(bodyParser.json());
-    app.use(morgan('tiny'));
+    this.app.use(bodyParser.json());
+    this.app.use(morgan('tiny'));
 
-    app.use(errorhandler());
+    this.app.use(errorhandler());
 
-    app.post('/simpleinout', (req, res, next) => {
+    this.app.post('/simpleinout', (req, res, next) => {
       const status = this.parseWebhook(req.body);
       if (status) {
         res.status(201).send(req.body);
@@ -42,7 +40,7 @@ class Board extends BaseLocalNode {
       }
     });
 
-    app.listen(port, () => {
+    this.app.listen(port, () => {
       console.log(`Listening on port ${port}`);
     });
   }
