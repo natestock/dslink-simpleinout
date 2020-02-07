@@ -10,6 +10,14 @@ class Board extends BaseLocalNode { //runs express server to catch webhook
   constructor(path, provider) {
     super(path, provider);
   }
+  loadChild(name, data) {
+    if (!this.children.has(name)) {
+      if (data['$is'] === Person.profileName) {
+        let node = this.createChild(name, Person);
+        node.load(data);
+      }
+    }
+  }
   parseWebhook = (body) => {  //parses json webhook and creates/updates node accordingly
     let username = body.username;
     let status = body.data.status;
@@ -50,10 +58,12 @@ class Board extends BaseLocalNode { //runs express server to catch webhook
 
 class Person extends ValueNode {  //username and current status of person
   constructor(path, provider) {
-    super(path, provider);
+    super(path, provider, undefined, undefined, true);
     this.createChild('Remove', Remove);
   }
 }
+
+Person.profileName = 'person';
 
 class Remove extends ActionNode {
   onInvoke(params, parentNode) {
